@@ -1,7 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Packages;
+use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\ShopComponent;
+use App\Http\Livewire\CartComponent;
+use App\Http\Livewire\CheckoutComponent;
+use App\Http\Livewire\ThankyouComponent;
+// use App\Http\Livewire\PackageComponent;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +19,14 @@ use App\Http\Livewire\Packages;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', HomeComponent::class);
+Route::get('/shop', ShopComponent::class);
+Route::get('/cart', CartComponent::class)->name('product.cart');
+Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 
 Route::group(['middleware' => [ 'auth:sanctum', 'verified' ]], function () {
     
@@ -30,5 +41,8 @@ Route::group(['middleware' => [ 'auth:sanctum', 'verified' ]], function () {
     Route::get('/reports', function () {
         return view('reports');
     })->name('reports');
+
+    Route::get('/thank-you', ThankyouComponent::class)->name('thankyou');
+    
 
 });
